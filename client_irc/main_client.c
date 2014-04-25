@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Tue Apr  8 14:10:30 2014 Bertrand-Rapello Baptiste
-** Last update Thu Apr 24 16:11:48 2014 Bertrand-Rapello Baptiste
+** Last update Fri Apr 25 17:38:42 2014 Bertrand-Rapello Baptiste
 */
 
 #include	<unistd.h>
@@ -33,7 +33,10 @@ int		start_prompt(int fd_serv)
   size_t	len;
   int		rtr;
   fd_set	fd_read;
+  struct timeval tv;
 
+  tv.tv_sec = 10;
+  tv.tv_usec = 0;
   FD_ZERO(&fd_read);
   rtr = 0;
   line = malloc(512*sizeof(char));
@@ -44,6 +47,7 @@ int		start_prompt(int fd_serv)
       FD_SET(0, &fd_read);
       FD_SET(fd_serv, &fd_read);
       select(4, &fd_read, NULL, NULL, NULL);
+      tv.tv_sec = 10;
       if (FD_ISSET(0, &fd_read))
 	{
 	  rtr = read(0, line, 511);
@@ -88,7 +92,7 @@ int			main(int ac, char **av)
   struct protoent	*protoent;
   struct sockaddr_in	addr_in;
 
-  if (ac <= 1)
+  if (ac <= 2)
     {
       printf("usage: ./client [IP's Server] [port's connection]\n");
       return (0);

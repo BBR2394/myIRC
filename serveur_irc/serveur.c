@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Wed Apr 23 17:30:31 2014 Bertrand-Rapello Baptiste
-** Last update Thu Apr 24 17:17:54 2014 Bertrand-Rapello Baptiste
+** Last update Fri Apr 25 15:55:06 2014 Bertrand-Rapello Baptiste
 */
 
 #include        <unistd.h>
@@ -51,7 +51,7 @@ int	init_info(t_irc *info)
   int	c;
 
   info->fd_max = FDMAX;
-  if (info->fd_max > 1020)
+  if (info->fd_max > 1020 || info->fd_max < 6)
     return (-1);
   c = 4;
   info->fd_type = malloc(info->fd_max * sizeof(char));
@@ -79,7 +79,11 @@ int             main(int ac, char **av)
       printf("usage: ./serveur [port connection]\n");
       return (-1);
     }
-  init_info(&info);
+  if (init_info(&info) == -1)
+    {
+      printf("erreur when you initialize the server\n");
+      return (-1);
+    }
   if ((info.socket_fd = init_serveur(ac, av, atoi(av[1]))) == -1)
     {
       printf("erreur when you initialize the connection\n");

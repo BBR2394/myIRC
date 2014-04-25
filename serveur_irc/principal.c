@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Thu Apr 24 13:55:18 2014 Bertrand-Rapello Baptiste
-** Last update Thu Apr 24 13:57:22 2014 Bertrand-Rapello Baptiste
+** Last update Fri Apr 25 14:24:06 2014 Bertrand-Rapello Baptiste
 */
 
 #include        <unistd.h>
@@ -25,7 +25,7 @@ void    set_fdset(t_irc *info, fd_set  *fd_read)
 {
   int   c;
 
-  printf("set fdset\n");
+  //printf("set fdset\n");
   c = 0;
   while (c < info->fd_max)
     {
@@ -38,23 +38,23 @@ void    set_fdset(t_irc *info, fd_set  *fd_read)
       //write(1, "b", 1);
       c++;
     }
-  printf("\nfin fd_set\n");
+  //printf("\nfin fd_set\n");
 }
 
 void    check_isset(t_irc *info, fd_set  *fd_read)
 {
   int   c;
 
-  printf("check iset\n");
+  // printf("check iset\n");
   c = 0;
   while (c < info->fd_max)
     {
       if (FD_ISSET(c, fd_read))
         {
-          printf("le c est egale a %d %c   !!\n", c, info->fd_type[c]);
+          //printf("le c est egale a %d %c   !!\n", c, info->fd_type[c]);
           if (info->fd_type[c] == 'c')
             {
-              printf(" je suis rentrée ici\n");
+              //printf(" je suis rentrée ici\n");
               //client -> communique avec les autres
               client_read(c, info);
             }
@@ -89,7 +89,7 @@ int     start(t_irc *info)
           //close (info->socket_fd);
           //return (-1);
         }
-      printf("fin select \n");
+      //printf("fin select \n");
       check_isset(info, &fd_read);
       if (info->last_deconnection == 1)
         FD_ZERO(&fd_read);

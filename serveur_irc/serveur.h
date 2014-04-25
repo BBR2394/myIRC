@@ -5,13 +5,13 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Wed Apr 23 17:32:05 2014 Bertrand-Rapello Baptiste
-** Last update Thu Apr 24 17:05:30 2014 Bertrand-Rapello Baptiste
+** Last update Fri Apr 25 20:25:41 2014 Bertrand-Rapello Baptiste
 */
 
 #ifndef SERVEUR_H_
 # define SERVEUR_H_
 
-# define FDMAX 20
+# define FDMAX 10
 # define DEFAULT_PORT 2394
 
 typedef struct	s_usr
@@ -29,7 +29,7 @@ typedef struct	s_irc
   int	fd_max;
   char	*fd_type;
   int	last_deconnection;
-  struct s_usr	*u_list;
+  struct s_usr	**u_list;
 }		t_irc;
 
 #endif

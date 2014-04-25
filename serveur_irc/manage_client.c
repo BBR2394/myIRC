@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Thu Apr 24 13:57:46 2014 Bertrand-Rapello Baptiste
-** Last update Thu Apr 24 13:58:59 2014 Bertrand-Rapello Baptiste
+** Last update Fri Apr 25 20:18:19 2014 Bertrand-Rapello Baptiste
 */
 
 #include        <unistd.h>
@@ -68,9 +68,26 @@ int     new_client(int fd, t_irc *info)
   int   new_fd;
   struct sockaddr_in client_sin;
   socklen_t             size;
+  t_usr		*cpy;
+  t_usr		**cpy2;
 
+  cpy2 = NULL;
+  cpy = NULL;
   size = sizeof(struct sockaddr_in);
   new_fd = accept(fd, (struct sockaddr *)&client_sin, &size);
+  if (new_fd >= FDMAX)
+    {
+      my_putstr_fd("sorry too much connection... \n", new_fd);
+      close (new_fd);
+      return (1);
+    }
   info->fd_type[new_fd] = 'c';
+  return (0);
+  //cpy2 = info->u_list;
+  //cpy = *cpy2;
+  //cpy = info->u_list;
+  //add_link(cpy2, new_fd);
+  //show_list(cpy2);
+  //info->u_list = cpy;
+  //printf("nickmname :  %s\n", cpy->nick);
 }
-
