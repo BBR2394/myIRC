@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Tue Apr  8 14:10:30 2014 Bertrand-Rapello Baptiste
-** Last update Fri Apr 25 17:38:42 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 00:35:05 2014 Bertrand-Rapello Baptiste
 */
 
 #include	<unistd.h>
@@ -27,44 +27,53 @@ int	reset_buf(char *str, int len)
     str[c++] = '\0';
 }
 
+int	do_action(int fd, fd_set *fd_read, char *line)
+{
+  int	rtr;
+
+  rtr = 0;
+  if (FD_ISSET(0, fd_read))
+    {
+      rtr = read(0, line, 511);
+      write(fd, line, rtr);
+    }
+  else if (FD_ISSET(3, fd_read))
+    {
+      line[0] = '\0';
+      rtr = read(fd, line, 511);
+      if (rtr == -1)
+	{
+	  printf("the serve has quit  ...\n");
+	  return (-1);
+	}
+      my_putstr_fd(line, 1);
+    }
+}
+
 int		start_prompt(int fd_serv)
 {
-  char		*line;
-  size_t	len;
-  int		rtr;
-  fd_set	fd_read;
-  struct timeval tv;
+  size_t		len;
+  fd_set		fd_read;
+  struct timeval	tv;
+  char  *line;
+  int	rtr;
 
-  tv.tv_sec = 10;
-  tv.tv_usec = 0;
-  FD_ZERO(&fd_read);
   rtr = 0;
   line = malloc(512*sizeof(char));
   if (line == NULL)
     return (-1);
+  tv.tv_sec = 10;
+  tv.tv_usec = 0;
+  FD_ZERO(&fd_read);
   while (rtr != -1)
     {
       FD_SET(0, &fd_read);
       FD_SET(fd_serv, &fd_read);
-      select(4, &fd_read, NULL, NULL, NULL);
+      rtr = select(4, &fd_read, NULL, NULL, &tv);
       tv.tv_sec = 10;
-      if (FD_ISSET(0, &fd_read))
-	{
-	  rtr = read(0, line, 511);
-	  write(fd_serv, line, rtr);
-	}
-      else if (FD_ISSET(3, &fd_read))
-	{
-	  line[0] = '\0';
-	  rtr = read(fd_serv, line, 511);
-	  if (rtr == -1)
-	    {
-	      printf("au revoir le serveur a quitte enfin je crois ...\n");
-	      return (-1);
-	    }
-	  my_putstr_fd(line, 1);
-	}
-      reset_buf(line, 200);
+      if (do_action(fd_serv, &fd_read, line) == -1)
+	return (-1);
+      reset_buf(line, 512);
     }
 }
 
@@ -107,7 +116,6 @@ int			main(int ac, char **av)
     }
   else
     printf("connection etablished !!\n");
-
   start_prompt(socket_fd);
   close(socket_fd);
   return (0);

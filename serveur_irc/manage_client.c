@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Thu Apr 24 13:57:46 2014 Bertrand-Rapello Baptiste
-** Last update Fri Apr 25 20:18:19 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 00:33:25 2014 Bertrand-Rapello Baptiste
 */
 
 #include        <unistd.h>
@@ -83,11 +83,4 @@ int     new_client(int fd, t_irc *info)
     }
   info->fd_type[new_fd] = 'c';
   return (0);
-  //cpy2 = info->u_list;
-  //cpy = *cpy2;
-  //cpy = info->u_list;
-  //add_link(cpy2, new_fd);
-  //show_list(cpy2);
-  //info->u_list = cpy;
-  //printf("nickmname :  %s\n", cpy->nick);
 }
