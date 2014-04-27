@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Thu Apr 24 13:57:46 2014 Bertrand-Rapello Baptiste
-** Last update Sun Apr 27 16:26:42 2014 Koszyczek Laurent
+** Last update Sun Apr 27 17:02:21 2014 Bertrand-Rapello Baptiste
 */
 
 #include		<unistd.h>
@@ -24,16 +24,16 @@
 void			write_on_the_rest(int fd, char *buf, int len, int max)
 {
   int			c;
-  char			fdbis;
+  char			fdbis[3];
 
   c = 4;
-  fdbis = (char)fd + 48;
+  bzero(fdbis, 3);
   while (c < max)
     {
       if (c != fd)
         {
           write(c, "perso ", 6);
-          my_putchar_fd(fdbis, c);
+          sprintf(fdbis, "%d", c);
           write(c, " say :", 6);
           write(c, buf, len);
         }
