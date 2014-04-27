@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Thu Apr 24 13:57:46 2014 Bertrand-Rapello Baptiste
-** Last update Sun Apr 27 17:02:21 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 18:52:13 2014 Bertrand-Rapello Baptiste
 */
 
 #include		<unistd.h>
@@ -33,7 +33,8 @@ void			write_on_the_rest(int fd, char *buf, int len, int max)
       if (c != fd)
         {
           write(c, "perso ", 6);
-          sprintf(fdbis, "%d", c);
+          sprintf(fdbis, "%d", fd);
+	  my_putstr_fd(fdbis, c);
           write(c, " say :", 6);
           write(c, buf, len);
         }
@@ -50,7 +51,6 @@ void			client_read(int fd, t_irc *info)
   if (r > 0)
     {
       buf[r] = '\0';
-      printf("%d: %s\n", fd, buf);
       write_on_the_rest(fd, buf, r, info->fd_max);
     }
   else
