@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Tue Apr  8 14:10:30 2014 Bertrand-Rapello Baptiste
-** Last update Sun Apr 27 00:35:05 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 16:21:29 2014 Koszyczek Laurent
 */
 
 #include	<unistd.h>
@@ -108,7 +108,8 @@ int			main(int ac, char **av)
     }
   if ((socket_fd = init_client(av, &addr_in)) == -1)
     return (-1);
-  if (connect(socket_fd, (const struct sockaddr *)&addr_in, sizeof(struct sockaddr)) == -1)
+  if (connect(socket_fd, (const struct sockaddr *)&addr_in,
+		sizeof(struct sockaddr)) == -1)
     {
       printf("connection failed ...\n");
       close(socket_fd);

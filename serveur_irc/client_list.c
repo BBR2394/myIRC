@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Thu Apr 24 22:36:49 2014 Bertrand-Rapello Baptiste
-** Last update Fri Apr 25 15:30:06 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 16:24:04 2014 Koszyczek Laurent
 */
 
 #include        <unistd.h>
@@ -44,13 +44,12 @@ int	add_link(t_usr **list, int fd)
     return (-1);
   cpy->fd = fd;
   cpy->id_chan = 0;
-  //cpy->nick = strdup("unknpown");
   cpy->nick = malloc(9*sizeof(char));
+  if (cpy->nick == NULL)
+    error_exit("Error malloc\n");
   cpy->nick[0] = 'a';
   cpy->nick[1] = 'z';
   cpy->nick[2] = '\0';
-  //cpy->nick[0] = '\0';
-  //cpy->nick = strcat(cpy->nick, "unknown");
   cpy->chan_name = NULL;
   cpy->next = *list;
   *list = cpy;

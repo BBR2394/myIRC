@@ -5,27 +5,26 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Thu Apr 24 13:57:46 2014 Bertrand-Rapello Baptiste
-** Last update Sun Apr 27 00:33:25 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 16:26:42 2014 Koszyczek Laurent
 */
 
-#include        <unistd.h>
-#include        <stdio.h>
-#include        <stdlib.h>
-#include        <string.h>
-#include        <dirent.h>
-#include        <sys/types.h>
-#include        <sys/socket.h>
-#include        <netdb.h>
-#include        <netinet/in.h>
-#include        <arpa/inet.h>
-#include        <sys/stat.h>
-#include        "serveur.h"
+#include		<unistd.h>
+#include		<stdio.h>
+#include		<stdlib.h>
+#include		<string.h>
+#include		<dirent.h>
+#include		<sys/types.h>
+#include		<sys/socket.h>
+#include		<netdb.h>
+#include		<netinet/in.h>
+#include		<arpa/inet.h>
+#include		<sys/stat.h>
+#include		"serveur.h"
 
-void    write_on_the_rest(int fd, char *buf, int len, int max)
+void			write_on_the_rest(int fd, char *buf, int len, int max)
 {
-  int   c;
-  char  fdbis;
-
+  int			c;
+  char			fdbis;
 
   c = 4;
   fdbis = (char)fd + 48;
@@ -42,10 +41,10 @@ void    write_on_the_rest(int fd, char *buf, int len, int max)
     }
 }
 
-void    client_read(int fd, t_irc *info)
+void			client_read(int fd, t_irc *info)
 {
-  int r;
-  char buf[4096];
+  int			r;
+  char			buf[4096];
 
   r = read(fd, buf, 4096);
   if (r > 0)
@@ -63,13 +62,13 @@ void    client_read(int fd, t_irc *info)
     }
 }
 
-int     new_client(int fd, t_irc *info)
+int			new_client(int fd, t_irc *info)
 {
-  int   new_fd;
-  struct sockaddr_in client_sin;
-  socklen_t             size;
-  t_usr		*cpy;
-  t_usr		**cpy2;
+  int			new_fd;
+  struct sockaddr_in	client_sin;
+  socklen_t		size;
+  t_usr			*cpy;
+  t_usr			**cpy2;
 
   cpy2 = NULL;
   cpy = NULL;

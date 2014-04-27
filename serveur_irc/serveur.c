@@ -5,29 +5,28 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Wed Apr 23 17:30:31 2014 Bertrand-Rapello Baptiste
-** Last update Fri Apr 25 15:55:06 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 16:25:28 2014 Koszyczek Laurent
 */
 
-#include        <unistd.h>
-#include        <stdio.h>
-#include        <stdlib.h>
-#include        <string.h>
-#include        <dirent.h>
-#include        <sys/types.h>
-#include        <sys/socket.h>
-#include        <netdb.h>
-#include        <netinet/in.h>
-#include        <arpa/inet.h>
-#include        <sys/stat.h>
-#include        "serveur.h"
+#include	<unistd.h>
+#include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
+#include	<dirent.h>
+#include	<sys/types.h>
+#include	<sys/socket.h>
+#include	<netdb.h>
+#include	<netinet/in.h>
+#include	<arpa/inet.h>
+#include	<sys/stat.h>
+#include	"serveur.h"
 
-
-int                     init_serveur(int ac, char **av, int port)
+int			init_serveur(int ac, char **av, int port)
 {
-  int                   socket_fd;
-  int                   rtr;
-  struct protoent       *protoent;
-  struct sockaddr_in    sin_serv;
+  int			socket_fd;
+  int			rtr;
+  struct protoent	*protoent;
+  struct sockaddr_in	sin_serv;
 
   rtr = 0;
   protoent = getprotobyname("TCP");
@@ -46,9 +45,9 @@ int                     init_serveur(int ac, char **av, int port)
   return (socket_fd);
 }
 
-int	init_info(t_irc *info)
+int			init_info(t_irc *info)
 {
-  int	c;
+  int			c;
 
   info->fd_max = FDMAX;
   if (info->fd_max > 1020 || info->fd_max < 6)
@@ -68,22 +67,22 @@ int	init_info(t_irc *info)
   return (0);
 }
 
-int             main(int ac, char **av)
+int			error_exit(char *str)
 {
-  int		rtr;
-  t_irc		info;
+  printf("%s", str);
+  return (-1);
+}
+
+int			main(int ac, char **av)
+{
+  int			rtr;
+  t_irc			info;
 
   rtr = 0;
   if (ac <= 1)
-    {
-      printf("usage: ./serveur [port connection]\n");
-      return (-1);
-    }
+    return (error_exit("usage: ./serveur [port connection]\n"));
   if (init_info(&info) == -1)
-    {
-      printf("erreur when you initialize the server\n");
-      return (-1);
-    }
+    return (error_exit("erreur when you initialize the server\n"));
   if ((info.socket_fd = init_serveur(ac, av, atoi(av[1]))) == -1)
     {
       printf("erreur when you initialize the connection\n");

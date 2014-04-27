@@ -5,7 +5,7 @@
 ** Login   <bertra_l@epitech.net>
 ** 
 ** Started on  Tue Apr  8 18:05:47 2014 Bertrand-Rapello Baptiste
-** Last update Tue Apr  8 18:10:14 2014 Bertrand-Rapello Baptiste
+** Last update Sun Apr 27 16:21:43 2014 Koszyczek Laurent
 */
 
 void	my_putchar_fd(char c, int fd)
