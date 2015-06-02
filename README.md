@@ -9,4 +9,6 @@
 
 //autor | auteurs
 --------------------
-	-> this project was made in a group of two people. Ce projet a été fait en binome : koszyc_l et bertra_l(me)
+	-> this project was made in a group of two people.
+	Ce projet a été fait en binome :
+	   	    	=> koszyc_l(koszycl) et bertra_l(me)
